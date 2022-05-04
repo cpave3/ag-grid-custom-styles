@@ -41,20 +41,26 @@ const getAverageGradeFromParams = (params) => {
 const App = () => {
   const [rowData] = useState(() => makeData(15));
 
+  const cellClassRules = {
+    "green-text": (params) => params.value >= 75,
+    "orange-text": (params) => params.value <= 45,
+    "red-text": (params) => params.value <= 25,
+  };
+
   const [columnDefs] = useState([
     { field: "name", cellStyle: { fontWeight: "bold" } },
-    { field: "ag101", cellClass: "score-cell" },
-    { field: "ag102", cellClass: "score-cell" },
-    { field: "ag103", cellClass: "score-cell" },
-    { field: "ag104", cellClass: "score-cell" },
-    { field: "ag105", cellClass: "score-cell" },
+    { field: "ag101", cellClass: "score-cell", cellClassRules },
+    { field: "ag102", cellClass: "score-cell", cellClassRules },
+    { field: "ag103", cellClass: "score-cell", cellClassRules },
+    { field: "ag104", cellClass: "score-cell", cellClassRules },
+    { field: "ag105", cellClass: "score-cell", cellClassRules },
   ]);
 
   const getRowStyle = (params) => {
     const averageGrade = getAverageGradeFromParams(params);
 
     if (averageGrade < 50) {
-      return { background: "#ff6961" };
+      return { background: "#ff7979" };
     }
 
     return undefined;
